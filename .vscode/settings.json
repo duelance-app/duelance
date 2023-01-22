@@ -1,9 +1,11 @@
 {
+    "copyright": "Copyright 2023 Duelance Inc. - All Rights Reserved. This file is part of the Duelance project. Unauthorized copying, transferring or reproduction of this file, via any medium is strictly prohibited. Proprietary and confidential.",
     "typescript.tsdk": "node_modules/.pnpm/typescript@4.9.4/node_modules/typescript/lib",
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "cSpell.ignoreWords": ["zustand"],
     "cSpell.words": [
         "clsx",
+        "superjson",
         "TRPC"
     ]
 }

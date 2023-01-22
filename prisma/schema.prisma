@@ -1,5 +1,11 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+//****************************************************************************
+//* Copyright 2023 Duelance Inc. - All Rights Reserved
+//* 
+//* This file is part of the Duelance project.
+//* 
+//* Unauthorized copying, transferring or reproduction of this file, via any medium is strictly prohibited.
+//* Proprietary and confidential.
+//****************************************************************************
 
 generator client {
     provider = "prisma-client-js"

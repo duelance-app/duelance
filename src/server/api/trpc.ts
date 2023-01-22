@@ -1,11 +1,11 @@
-/**
- * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
- * 1. You want to modify request context (see Part 1)
- * 2. You want to create a new middleware or type of procedure (see Part 3)
- *
- * tl;dr - this is where all the tRPC server stuff is created and plugged in.
- * The pieces you will need to use are documented accordingly near the end
- */
+/****************************************************************************
+ * Copyright 2023 Duelance Inc. - All Rights Reserved
+ * 
+ * This file is part of the Duelance project.
+ * 
+ * Unauthorized copying, transferring or reproduction of this file, via any medium is strictly prohibited.
+ * Proprietary and confidential.
+ ****************************************************************************/
 
 /**
  * 1. CONTEXT
