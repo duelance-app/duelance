@@ -1,5 +1,5 @@
 {
-    "copyright":"Copyright 2023 Duelance Inc. - All Rights Reserved. This file is part of the Duelance project. Unauthorized copying, transferring or reproduction of this file, via any medium is strictly prohibited. Proprietary and confidential.",
+    "copyright": "Copyright 2023 Duelance Inc. - All Rights Reserved. This file is part of the Duelance project. Unauthorized copying, transferring or reproduction of this file, via any medium is strictly prohibited. Proprietary and confidential.",
     "name": "duelance",
     "version": "0.0.0",
     "private": true,
@@ -23,6 +23,7 @@
         "@trpc/next": "^10.8.1",
         "@trpc/react-query": "^10.8.1",
         "@trpc/server": "^10.8.1",
+        "@vercel/analytics": "^0.1.8",
         "jotai": "^1.13.1",
         "next": "^13.1.3",
         "next-auth": "^4.18.8",

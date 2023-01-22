@@ -1,12 +1,3 @@
-#****************************************************************************
-#* Copyright 2023 Duelance Inc. - All Rights Reserved
-#* 
-#* This file is part of the Duelance project.
-#* 
-#* Unauthorized copying, transferring or reproduction of this file, via any medium is strictly prohibited.
-#* Proprietary and confidential.
-#*****************************************************************************
-
 lockfileVersion: 5.4
 
 specifiers:
@@ -24,6 +15,7 @@ specifiers:
   '@types/react-dom': ^18.0.10
   '@typescript-eslint/eslint-plugin': ^5.48.2
   '@typescript-eslint/parser': ^5.48.2
+  '@vercel/analytics': ^0.1.8
   autoprefixer: ^10.4.13
   clsx: ^1.2.1
   eslint: ^8.32.0
@@ -54,6 +46,7 @@ dependencies:
   '@trpc/next': 10.9.0_u663hlrgg6eh3xuz2qmu3gt7wq
   '@trpc/react-query': 10.9.0_qw4miir7nnxijwjta54q3esyeq
   '@trpc/server': 10.9.0
+  '@vercel/analytics': 0.1.8_react@18.2.0
   jotai: 1.13.1_react@18.2.0
   next: 13.1.3_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.18.8_xehvwk7kia3kss3yh76fk44sqm
@@ -579,6 +572,14 @@ packages:
       '@typescript-eslint/types': 5.48.2
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@vercel/analytics/0.1.8_react@18.2.0:
+    resolution: {integrity: sha512-PQrOI8BJ9qUiVJuQfnKiJd15eDjDJH9TBKsNeMrtelT4NAk7d9mBVz1CoZkvoFnHQ0OW7Xnqmr1F2nScfAnznQ==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.1:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
