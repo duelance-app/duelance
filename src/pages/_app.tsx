@@ -8,13 +8,14 @@
  *********************************************************************************************************/
 
 import "../styles/globals.css"
-import { Inter } from "@next/font/google"
 import { type AppType } from "next/app"
+import { Inter } from "@next/font/google"
+import { Analytics } from "@vercel/analytics/react"
+import { Provider as JotaiProvider } from "jotai"
 import { type Session } from "next-auth"
 import { SessionProvider as AuthProvider } from "next-auth/react"
-import { Provider as JotaiProvider } from "jotai"
-import { api } from "@/utils/api"
-import { Analytics } from "@vercel/analytics/react"
+
+import { api } from "@/lib/utils/api"
 import Head from "@/components/Head"
 
 const inter = Inter({ subsets: ["latin"] })
