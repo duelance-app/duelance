@@ -1,14 +1,14 @@
 /****************************************************************************
  * Copyright 2023 Duelance Inc. - All Rights Reserved
- * 
+ *
  * This file is part of the Duelance project.
- * 
+ *
  * Unauthorized copying, transferring or reproduction of this file, via any medium is strictly prohibited.
  * Proprietary and confidential.
  ****************************************************************************/
 
 import { type GetServerSidePropsContext } from "next"
-import { unstable_getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 
@@ -26,5 +26,5 @@ export const getServerAuthSession = async (ctx: {
     req: GetServerSidePropsContext["req"]
     res: GetServerSidePropsContext["res"]
 }) => {
-    return await unstable_getServerSession(ctx.req, ctx.res, authOptions)
+    return await getServerSession(ctx.req, ctx.res, authOptions)
 }
