@@ -46,3 +46,11 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# sitemap files
+public/robots.txt
+public/sitemap*.xml
+
+# non-pnpm lockfiles
+yarn.lock
+package-lock.json

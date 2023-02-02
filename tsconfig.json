@@ -1,5 +1,5 @@
 {
-    "copyright":"Copyright 2023 Duelance Inc. - All Rights Reserved. This file is part of the Duelance project. Unauthorized copying, transferring or reproduction of this file, via any medium is strictly prohibited. Proprietary and confidential.",
+    "copyright": "Copyright 2023 Duelance Inc. - All Rights Reserved. This file is part of the Duelance project. Unauthorized copying, transferring or reproduction of this file, via any medium is strictly prohibited. Proprietary and confidential.",
     "compilerOptions": {
         "target": "ES2022",
         "lib": ["dom", "dom.iterable", "esnext"],
@@ -32,7 +32,8 @@
         "**/*.cjs",
         "**/*.mjs",
         ".next/types/**/*.ts",
-        "eslint.config.js"
+        "eslint.config.js",
+        "next-sitemap.config.cjs"
     ],
     "exclude": ["node_modules"]
 }
