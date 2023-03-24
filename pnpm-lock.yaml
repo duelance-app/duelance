@@ -34,7 +34,7 @@ specifiers:
   jotai: ^2.0.3
   next: ^13.2.4
   next-auth: ^4.20.1
-  next-sitemap: ^3.1.55
+  next-sitemap: ^4.0.0
   postcss: ^8.4.21
   prettier: ^2.8.6
   prettier-plugin-tailwindcss: ^0.2.5
@@ -69,7 +69,7 @@ dependencies:
   jotai: 2.0.3_react@18.2.0
   next: 13.2.4_hrdbe576m4w26u2yfpqpvbxyky
   next-auth: 4.20.1_ld2jel3hspngo3u5lti2kgl2sq
-  next-sitemap: 3.1.55_jccvrrmb7rb3yyi3af3znueaea
+  next-sitemap: 4.0.6_jccvrrmb7rb3yyi3af3znueaea
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-wrap-balancer: 0.4.0_react@18.2.0
@@ -2758,8 +2758,8 @@ packages:
       uuid: 8.3.2
     dev: false
 
-  /next-sitemap/3.1.55_jccvrrmb7rb3yyi3af3znueaea:
-    resolution: {integrity: sha512-ZjkRfkqoSLbU+e8W9TWWe0zfOGNA47lpvm35kNcUCmj73gpLX2PIn51gwHT/B6bgGVAFYY0OXixJDrxIIwcEHw==}
+  /next-sitemap/4.0.6_jccvrrmb7rb3yyi3af3znueaea:
+    resolution: {integrity: sha512-pZ9tynYe6mRR189qZqcOlWVgM1Gxo07BJQW0AjerKmLwQOt+6FQMdaDgifgCt6jDT3Y3EG/+NUDDZRcd0gbPkA==}
     engines: {node: '>=14.18'}
     hasBin: true
     peerDependencies:
