@@ -20,5 +20,10 @@
     ],
     "rules": {
         "@typescript-eslint/consistent-type-imports": "warn"
+    },
+    "settings": {
+        "tailwindcss": {
+            "callees": ["twmerge", "clsx", "cn"]
+        }
     }
 }
