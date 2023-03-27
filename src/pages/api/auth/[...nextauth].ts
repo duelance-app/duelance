@@ -7,12 +7,12 @@
  * Proprietary and confidential.
  *********************************************************************************************************/
 
-import NextAuth, { type NextAuthOptions } from "next-auth"
-// Prisma adapter for NextAuth, optional and can be removed
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-
 import { env } from "@/env/server.mjs"
 import { prisma } from "@/server/db"
+// Prisma adapter for NextAuth, optional and can be removed
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import NextAuth, { type NextAuthOptions } from "next-auth"
+import GithubProvider from "next-auth/providers/github"
 
 export const authOptions: NextAuthOptions = {
     // Include user.id on session
@@ -36,6 +36,10 @@ export const authOptions: NextAuthOptions = {
          * NextAuth.js docs for the provider you want to use. Example:
          * @see https://next-auth.js.org/providers/github
          */
+        GithubProvider({
+            clientId: env.GITHUB_CLIENT_ID,
+            clientSecret: env.GITHUB_CLIENT_SECRET,
+        }),
     ],
 }
 
