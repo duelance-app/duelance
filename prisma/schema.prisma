@@ -17,12 +17,6 @@ datasource db {
     relationMode = "prisma"
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
-
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -56,9 +50,13 @@ model Session {
 model User {
     id            String    @id @default(cuid())
     name          String?
-    email         String?   @unique
+    userName      String?   @unique
+    email         String    @unique
     emailVerified DateTime?
+    bio           String?
     image         String?
+    status        String?
+    Socials       Social[]
     accounts      Account[]
     sessions      Session[]
 }
@@ -69,4 +67,21 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Followers {
+    userId      String
+    followerId  String
+    followed_at DateTime
+
+    @@id([userId, followerId])
+}
+
+model Social {
+    id         String @id @default(cuid())
+    userId     String
+    socialLink String
+    user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
 }
