@@ -6,8 +6,8 @@ import { userAtom } from "@/lib/utils/store"
 
 const Init = () => {
     const setUser = useSetAtom(userAtom)
-    // TODO: Change id to useSession().data?.user?.id
-    setUser(api.user.get.useQuery({ id: "clfptdb0400083b6li3k2qw7p" }).data)
+    console.log(useSession().data?.user?.id)
+    setUser(api.user.get.useQuery({ id: useSession().data?.user?.id }).data)
     return null
 }
 
