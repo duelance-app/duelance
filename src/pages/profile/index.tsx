@@ -9,6 +9,7 @@
 
 import { type NextPage } from "next"
 import Image from "next/image"
+import Link from "next/link"
 import { Avatar, Badge, Button, Divider, Menu } from "@mantine/core"
 import {
     IconBrandGithub,
@@ -16,8 +17,9 @@ import {
     IconBrandTwitter,
     IconBriefcase,
 } from "@tabler/icons-react"
+import { useAtomValue } from "jotai"
 
-import { api } from "@/lib/utils/api"
+import { userAtom } from "@/lib/utils/store"
 import Me from "@/assets/me.jpg"
 
 interface LongBoxType {
@@ -25,6 +27,7 @@ interface LongBoxType {
 }
 
 const temp = [1, 2, 3]
+const Badges = ["Full Stack Dev", "Tomfullery", "Brrrr"]
 
 const Profile: NextPage = () => {
     return (
@@ -36,33 +39,37 @@ const Profile: NextPage = () => {
 }
 
 const AccountInfoBox = () => {
-    const userData = api.user.get.useQuery({
-        id: "clfptdb0400083b6li3k2qw7p",
-    }).data
+    const userData = useAtomValue(userAtom)
     return (
         <div className="grid w-[30%] max-w-[18rem] grow grid-flow-row items-start justify-between gap-4 rounded-2xl bg-white p-4 text-left">
             <Avatar radius={1000} className="h-auto w-full">
-                <Image src={Me} alt="Avatar" />
+                <Image
+                    src={userData?.[0]?.image as string}
+                    alt="Avatar"
+                    width={1000}
+                    height={1000}
+                    className="h-auto w-full"
+                />
             </Avatar>
             <h1 className="flex flex-col">
-                <span className="text-3xl font-bold">{userData?.name}</span>
+                <span className="text-3xl font-bold">
+                    {userData?.[0]?.name}
+                </span>
                 <span className="text-xl font-light text-gray-500">
                     <span className="font-semibold">a.k.a. </span>
-                    {userData?.userName}
+                    {userData?.[0]?.userName}
                 </span>
             </h1>
             <div className="flex items-center justify-evenly overflow-auto text-center">
-                <Badge variant="outline" color="gray">
-                    Full-Stack Dev
-                </Badge>
-                <Badge variant="outline" color="gray">
-                    Tomfullery
-                </Badge>
-                <Badge variant="outline" color="gray">
-                    Brrrr
-                </Badge>
+                {Badges.map((v, i) => {
+                    return (
+                        <Badge variant="outline" color="gray" size="sm" key={i}>
+                            {v}
+                        </Badge>
+                    )
+                })}
             </div>
-            <p className="text-gray-600">{userData?.bio}</p>
+            <p className="text-gray-600">{userData?.[0]?.bio}</p>
             <Menu radius="md">
                 <Menu.Target>
                     <Button
@@ -71,7 +78,7 @@ const AccountInfoBox = () => {
                         color="dark"
                         leftIcon={<IconBriefcase />}
                     >
-                        {userData?.status}
+                        {userData?.[0]?.status}
                     </Button>
                 </Menu.Target>
                 <Menu.Dropdown>
@@ -81,13 +88,28 @@ const AccountInfoBox = () => {
                 </Menu.Dropdown>
             </Menu>
             <p className="text-gray-500">
-                <span className="font-medium">30</span> follower ·{" "}
-                <span className="font-medium">32</span> following
+                <span className="font-medium">{userData?.[1]}</span> followers ·{" "}
+                <span className="font-medium">{userData?.[2]}</span> following
             </p>
             <div className="flex items-center justify-evenly">
-                <IconBrandLinkedin />
+                {userData?.[3].map((v, i) => {
+                    return (
+                        <Link href={v.socialLink} key={i} target="_blank">
+                            {(v.socialLink.startsWith(
+                                "https://www.linkedin.com"
+                            ) && <IconBrandLinkedin />) ||
+                                (v.socialLink.startsWith(
+                                    "https://github.com"
+                                ) && <IconBrandGithub />) ||
+                                (v.socialLink.startsWith(
+                                    "https://twitter.com"
+                                ) && <IconBrandTwitter />)}
+                        </Link>
+                    )
+                })}
+                {/* <IconBrandLinkedin />
                 <IconBrandTwitter />
-                <IconBrandGithub />
+                <IconBrandGithub /> */}
             </div>
             <Button variant="outline" radius="xl" size="md" color="dark">
                 Edit Profile

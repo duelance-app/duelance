@@ -13,10 +13,26 @@ import { createTRPCRouter, publicProcedure } from "../trpc"
 
 export const userRouter = createTRPCRouter({
     get: publicProcedure
-        .input(z.object({ id: z.string() }))
+        .input(z.object({ id: z.string().optional() }))
         .query(({ input, ctx }) => {
-            return ctx.prisma.user.findUnique({
+            ctx.prisma.followers.count({ where: { followerId: input.id } })
+            const data = ctx.prisma.user.findUnique({
                 where: { id: input.id },
             })
+            const followers = ctx.prisma.followers.count({
+                where: { userId: input.id },
+            })
+            const following = ctx.prisma.followers.count({
+                where: { followerId: input.id },
+            })
+            const socials = ctx.prisma.social.findMany({
+                where: { userId: input.id },
+            })
+            return ctx.prisma.$transaction([
+                data,
+                followers,
+                following,
+                socials,
+            ])
         }),
 })

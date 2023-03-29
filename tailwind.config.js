@@ -7,8 +7,9 @@
  * Proprietary and confidential.
  *********************************************************************************************************/
 
+/* eslint-disable import/no-anonymous-default-export */
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
     content: ["./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
         extend: {},

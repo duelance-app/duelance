@@ -7,6 +7,17 @@
  * Proprietary and confidential.
  *********************************************************************************************************/
 
+import type { Social, User } from "@prisma/client"
 import { atom } from "jotai"
 
-export const countAtom = atom(100)
+const userAtom = atom<
+    | [
+          user: User | null,
+          followerCount: number,
+          followingCount: number,
+          socials: Social[]
+      ]
+    | undefined
+>(undefined)
+
+export { userAtom }

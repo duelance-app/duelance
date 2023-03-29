@@ -48,17 +48,18 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    userName      String?   @unique
-    email         String    @unique
-    emailVerified DateTime?
-    bio           String?
-    image         String?
-    status        String?
-    Socials       Social[]
-    accounts      Account[]
-    sessions      Session[]
+    id             String               @id @default(cuid())
+    name           String?
+    userName       String?              @unique
+    email          String               @unique
+    emailVerified  DateTime?
+    bio            String?
+    image          String?
+    status         String?
+    socials        Social[]
+    accounts       Account[]
+    sessions       Session[]
+    additionalData AdditionalUserData[]
 }
 
 model VerificationToken {
@@ -84,4 +85,124 @@ model Social {
     user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@index([userId])
+}
+
+model AdditionalUserData {
+    id              String            @id @default(cuid())
+    userId          String
+    experience      UserExperience[]
+    projects        UserProject[]
+    UserSkill       UserSkill[]
+    UserEducation   UserEducation[]
+    UserCertificate UserCertificate[]
+    UserCourse      UserCourse[]
+    UserAward       UserAward[]
+    UserPublication UserPublication[]
+    user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
+}
+
+model UserExperience {
+    id                   String             @id @default(cuid())
+    additionalUserDataId String
+    title                String
+    company              String?
+    location             String?
+    startDate            DateTime
+    endDate              DateTime?
+    current              Boolean?
+    description          String?
+    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+
+    @@index([additionalUserDataId])
+}
+
+model UserProject {
+    id                   String             @id @default(cuid())
+    additionalUserDataId String
+    title                String
+    description          String?
+    link                 String?
+    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+
+    @@index([additionalUserDataId])
+}
+
+model UserSkill {
+    id                   String             @id @default(cuid())
+    additionalUserDataId String
+    title                String
+    level                String
+    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+
+    @@index([additionalUserDataId])
+}
+
+model UserEducation {
+    id                   String             @id @default(cuid())
+    additionalUserDataId String
+    school               String
+    degree               String?
+    fieldOfStudy         String?
+    startDate            DateTime
+    endDate              DateTime?
+    current              Boolean?
+    description          String?
+    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+
+    @@index([additionalUserDataId])
+}
+
+model UserCertificate {
+    id                   String             @id @default(cuid())
+    additionalUserDataId String
+    title                String
+    certificateUrl       String?
+    licenseNumber        String?
+    startDate            DateTime
+    endDate              DateTime?
+    current              Boolean?
+    description          String?
+    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+
+    @@index([additionalUserDataId])
+}
+
+model UserCourse {
+    id                   String             @id @default(cuid())
+    additionalUserDataId String
+    title                String
+    courseUrl            String?
+    startDate            DateTime
+    endDate              DateTime?
+    current              Boolean?
+    description          String?
+    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+
+    @@index([additionalUserDataId])
+}
+
+model UserAward {
+    id                   String             @id @default(cuid())
+    additionalUserDataId String
+    title                String
+    description          String?
+    awardDate            DateTime
+    awardUrl             String?
+    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+
+    @@index([additionalUserDataId])
+}
+
+model UserPublication {
+    id                   String             @id @default(cuid())
+    additionalUserDataId String
+    name                 String
+    publisher            String?
+    releaseDate          DateTime
+    website              String?
+    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+
+    @@index([additionalUserDataId])
 }
