@@ -15,14 +15,13 @@ export const userRouter = createTRPCRouter({
     get: publicProcedure
         .input(z.object({ id: z.string().optional() }))
         .query(({ input, ctx }) => {
-            ctx.prisma.followers.count({ where: { followerId: input.id } })
             const data = ctx.prisma.user.findUnique({
                 where: { id: input.id },
             })
-            const followers = ctx.prisma.followers.count({
+            const followers = ctx.prisma.follower.count({
                 where: { userId: input.id },
             })
-            const following = ctx.prisma.followers.count({
+            const following = ctx.prisma.follower.count({
                 where: { followerId: input.id },
             })
             const socials = ctx.prisma.social.findMany({
