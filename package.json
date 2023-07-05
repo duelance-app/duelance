@@ -58,7 +58,7 @@
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-tailwindcss": "^3.10.1",
         "postcss": "^8.4.21",
-        "prettier": "^2.8.6",
+        "prettier": "^3.0.0",
         "prettier-plugin-tailwindcss": "^0.2.5",
         "prisma": "^4.11.0",
         "tailwind-merge": "^1.10.0",
