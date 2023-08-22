@@ -32,8 +32,9 @@
         "**/*.cjs",
         "**/*.mjs",
         ".next/types/**/*.ts",
-        "eslint.config.js",
-        "next-sitemap.config.cjs"
+        "*.cjs",
+        "*.js",
+        "*.mjs"
     ],
     "exclude": ["node_modules"]
 }

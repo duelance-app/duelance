@@ -26,7 +26,7 @@ const config = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "tailwindui.com",
+                hostname: "avatars.githubusercontent.com",
             },
         ],
     },

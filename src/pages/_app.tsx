@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils"
 import { api } from "@/lib/utils/api"
 import Head from "@/components/Head"
 import Header from "@/components/Header"
+import Init from "@/components/Init"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -31,12 +32,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
             <Head />
             <JotaiProvider>
                 <AuthProvider session={session}>
-                    <div
-                        className={cn(
-                            "m-0 flex h-screen w-screen flex-col overflow-auto bg-slate-800",
-                            inter.className
-                        )}
-                    >
+                    <Init />
+                    <div className={(cn(inter.className), "flex flex-col")}>
                         <Header />
                         <Component {...pageProps} />
                     </div>

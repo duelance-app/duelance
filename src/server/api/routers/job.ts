@@ -7,24 +7,14 @@
  * Proprietary and confidential.
  *********************************************************************************************************/
 
-import { atom } from "jotai"
+import { z } from "zod"
 
-type userAtomType =
-    | [
-          {
-              id: string
-              name: string
-              email: string
-              image: string | null
-              bio: string | null
-              status: string | null
-              userName: string
-          } | null,
-          number,
-          number
-      ]
-    | undefined
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc"
 
-const userAtom = atom<userAtomType>(undefined)
-
-export { userAtom, type userAtomType }
+export const userRouter = createTRPCRouter({
+    answer: protectedProcedure
+        .input(z.object({ id: z.string() }))
+        .mutation(async ({ input, ctx }) => {
+            return { input, ctx }
+        }),
+})

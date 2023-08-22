@@ -8,16 +8,21 @@
  *********************************************************************************************************/
 
 import Image from "next/image"
+import Link from "next/link"
 import { ActionIcon, Avatar } from "@mantine/core"
 import { IconBell, IconSearch } from "@tabler/icons-react"
+import { useAtomValue } from "jotai"
 
+import { userAtom } from "@/lib/utils/store"
 import Logo from "@/assets/logo.svg"
-import Me from "@/assets/me.jpg"
 
 const Header = () => {
+    const userData = useAtomValue(userAtom)
     return (
         <header className="m-4 flex h-14 items-center justify-between rounded-lg bg-white px-8 py-2">
-            <Image src={Logo} alt="Duelance" className="h-full w-auto" />
+            <Link href="/" className="h-full w-auto">
+                <Image src={Logo} alt="Duelance" className="h-full w-auto" />
+            </Link>
             <div className="flex items-center gap-2">
                 <ActionIcon>
                     <IconSearch />
@@ -26,7 +31,11 @@ const Header = () => {
                     <IconBell />
                 </ActionIcon>
                 <Avatar radius="xl">
-                    <Image src={Me} alt="Avatar" fill />
+                    <Image
+                        src={userData?.[0]?.image as string}
+                        alt="Avatar"
+                        fill
+                    />
                 </Avatar>
             </div>
         </header>
