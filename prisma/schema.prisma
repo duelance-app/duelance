@@ -38,18 +38,26 @@ model Session {
 }
 
 model User {
-    id             String               @id @default(cuid())
-    name           String?
-    email          String               @unique
-    emailVerified  DateTime?
-    image          String?
-    bio            String?
-    status         String?
-    userName       String?              @unique
-    socials        Social[]
-    accounts       Account[]
-    sessions       Session[]
-    additionalData AdditionalUserData[]
+    id            String            @id @default(cuid())
+    name          String
+    email         String            @unique
+    emailVerified DateTime?
+    image         String?
+    bio           String?
+    status        String?
+    userName      String            @unique
+    socials       UserSocial[]
+    accounts      Account[]
+    sessions      Session[]
+    tags          UserTag[]
+    experience    UserExperience[]
+    projects      UserProject[]
+    skills        UserSkill[]
+    education     UserEducation[]
+    certificates  UserCertificate[]
+    courses       UserCourse[]
+    awards        UserAward[]
+    publications  UserPublication[]
 }
 
 model VerificationToken {
@@ -60,7 +68,7 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
-model Social {
+model UserSocial {
     id         String @id @default(cuid())
     userId     String
     socialLink String
@@ -69,124 +77,116 @@ model Social {
     @@index([userId])
 }
 
-model AdditionalUserData {
-    id              String            @id @default(cuid())
-    userId          String
-    experience      UserExperience[]
-    projects        UserProject[]
-    UserSkill       UserSkill[]
-    UserEducation   UserEducation[]
-    UserCertificate UserCertificate[]
-    UserCourse      UserCourse[]
-    UserAward       UserAward[]
-    UserPublication UserPublication[]
-    user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+model UserTag {
+    id     String @id @default(cuid())
+    userId String
+    value  String
+    User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@index([userId])
 }
 
 model UserExperience {
-    id                   String             @id @default(cuid())
-    additionalUserDataId String
-    title                String
-    company              String?
-    location             String?
-    startDate            DateTime
-    endDate              DateTime?
-    current              Boolean?
-    description          String?
-    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+    id          String    @id @default(cuid())
+    userId      String
+    title       String
+    company     String?
+    location    String?
+    startDate   DateTime
+    endDate     DateTime?
+    current     Boolean?
+    description String?   @db.Text
+    User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@index([additionalUserDataId])
+    @@index([userId])
 }
 
 model UserProject {
-    id                   String             @id @default(cuid())
-    additionalUserDataId String
-    title                String
-    description          String?
-    link                 String?
-    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+    id          String  @id @default(cuid())
+    userId      String
+    title       String
+    description String? @db.Text
+    link        String?
+    User        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@index([additionalUserDataId])
+    @@index([userId])
 }
 
 model UserSkill {
-    id                   String             @id @default(cuid())
-    additionalUserDataId String
-    title                String
-    level                String
-    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+    id     String @id @default(cuid())
+    userId String
+    title  String
+    level  String
+    User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@index([additionalUserDataId])
+    @@index([userId])
 }
 
 model UserEducation {
-    id                   String             @id @default(cuid())
-    additionalUserDataId String
-    school               String
-    degree               String?
-    fieldOfStudy         String?
-    startDate            DateTime
-    endDate              DateTime?
-    current              Boolean?
-    description          String?
-    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+    id           String    @id @default(cuid())
+    userId       String
+    school       String
+    degree       String?
+    fieldOfStudy String?
+    startDate    DateTime
+    endDate      DateTime?
+    current      Boolean?
+    description  String?   @db.Text
+    User         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@index([additionalUserDataId])
+    @@index([userId])
 }
 
 model UserCertificate {
-    id                   String             @id @default(cuid())
-    additionalUserDataId String
-    title                String
-    certificateUrl       String?
-    licenseNumber        String?
-    startDate            DateTime
-    endDate              DateTime?
-    current              Boolean?
-    description          String?
-    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+    id             String    @id @default(cuid())
+    userId         String
+    title          String
+    certificateUrl String?
+    licenseNumber  String?
+    issuedDate     DateTime
+    expiryDate     DateTime?
+    description    String?   @db.Text
+    User           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@index([additionalUserDataId])
+    @@index([userId])
 }
 
 model UserCourse {
-    id                   String             @id @default(cuid())
-    additionalUserDataId String
-    title                String
-    courseUrl            String?
-    startDate            DateTime
-    endDate              DateTime?
-    current              Boolean?
-    description          String?
-    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+    id          String    @id @default(cuid())
+    userId      String
+    title       String
+    courseUrl   String?
+    startDate   DateTime
+    endDate     DateTime?
+    current     Boolean?
+    description String?   @db.Text
+    User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@index([additionalUserDataId])
+    @@index([userId])
 }
 
 model UserAward {
-    id                   String             @id @default(cuid())
-    additionalUserDataId String
-    title                String
-    description          String?
-    awardDate            DateTime
-    awardUrl             String?
-    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+    id          String   @id @default(cuid())
+    userId      String
+    title       String
+    description String?  @db.Text
+    awardDate   DateTime
+    awardUrl    String?
+    User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@index([additionalUserDataId])
+    @@index([userId])
 }
 
 model UserPublication {
-    id                   String             @id @default(cuid())
-    additionalUserDataId String
-    name                 String
-    publisher            String?
-    releaseDate          DateTime
-    website              String?
-    additionalUserData   AdditionalUserData @relation(fields: [additionalUserDataId], references: [id], onDelete: Cascade)
+    id          String   @id @default(cuid())
+    userId      String
+    name        String
+    publisher   String?
+    releaseDate DateTime
+    website     String?
+    User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@index([additionalUserDataId])
+    @@index([userId])
 }
 
 model Follower {

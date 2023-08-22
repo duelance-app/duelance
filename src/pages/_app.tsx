@@ -15,6 +15,7 @@ import { Provider as JotaiProvider } from "jotai"
 import { type Session } from "next-auth"
 import { SessionProvider as AuthProvider } from "next-auth/react"
 
+import { cn } from "@/lib/utils"
 import { api } from "@/lib/utils/api"
 import Head from "@/components/Head"
 import Header from "@/components/Header"
@@ -32,7 +33,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
             <JotaiProvider>
                 <AuthProvider session={session}>
                     <Init />
-                    <div className={inter.className} id="font-div">
+                    <div className={(cn(inter.className), "flex flex-col")}>
                         <Header />
                         <Component {...pageProps} />
                     </div>

@@ -11,6 +11,18 @@ import { type NextPage } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { Avatar, Badge, Button, Divider, Menu } from "@mantine/core"
+import type {
+    UserAward,
+    UserCertificate,
+    UserCourse,
+    UserEducation,
+    UserExperience,
+    UserProject,
+    UserPublication,
+    UserSkill,
+    UserSocial,
+    UserTag,
+} from "@prisma/client"
 import {
     IconBrandGithub,
     IconBrandLinkedin,
@@ -19,7 +31,8 @@ import {
 } from "@tabler/icons-react"
 import { useAtomValue } from "jotai"
 
-import { userAtom } from "@/lib/utils/store"
+import { api } from "@/lib/utils/api"
+import { userAtom, type userAtomType } from "@/lib/utils/store"
 import Me from "@/assets/me.jpg"
 
 interface LongBoxType {
@@ -27,21 +40,48 @@ interface LongBoxType {
 }
 
 const temp = [1, 2, 3]
-const Badges = ["Full Stack Dev", "Tomfullery", "Brrrr"]
+
+type additionalUserDataType =
+    | {
+          socials: UserSocial[]
+          tags: UserTag[]
+          experience: UserExperience[]
+          projects: UserProject[]
+          skills: UserSkill[]
+          education: UserEducation[]
+          certificates: UserCertificate[]
+          courses: UserCourse[]
+          awards: UserAward[]
+          publications: UserPublication[]
+      }
+    | null
+    | undefined
 
 const Profile: NextPage = () => {
+    const userData = useAtomValue(userAtom)
+    const additionalUserData = api.user.getAdditional.useQuery({
+        id: userData?.[0]?.id as string,
+    }).data
     return (
         <main className="flex grow items-start justify-between gap-8 p-4">
-            <AccountInfoBox />
+            <AccountInfoBox
+                userData={userData}
+                additionalUserData={additionalUserData}
+            />
             <LongBox type="Experience" />
         </main>
     )
 }
 
-const AccountInfoBox = () => {
-    const userData = useAtomValue(userAtom)
+const AccountInfoBox = ({
+    userData,
+    additionalUserData,
+}: {
+    userData: userAtomType
+    additionalUserData: additionalUserDataType
+}) => {
     return (
-        <div className="grid w-[30%] max-w-[18rem] grow grid-flow-row items-start justify-between gap-4 rounded-2xl bg-white p-4 text-left">
+        <div className="grid w-[30%] max-w-[18rem] grid-flow-row items-center justify-center gap-4 rounded-2xl bg-white p-4 text-left">
             <Avatar radius={1000} className="h-auto w-full">
                 <Image
                     src={userData?.[0]?.image as string}
@@ -61,10 +101,10 @@ const AccountInfoBox = () => {
                 </span>
             </h1>
             <div className="flex items-center justify-evenly overflow-auto text-center">
-                {Badges.map((v, i) => {
+                {additionalUserData?.tags.map((v, i) => {
                     return (
                         <Badge variant="outline" color="gray" size="sm" key={i}>
-                            {v}
+                            {v.value}
                         </Badge>
                     )
                 })}
@@ -92,7 +132,7 @@ const AccountInfoBox = () => {
                 <span className="font-medium">{userData?.[2]}</span> following
             </p>
             <div className="flex items-center justify-evenly">
-                {userData?.[3].map((v, i) => {
+                {additionalUserData?.socials.map((v, i) => {
                     return (
                         <Link href={v.socialLink} key={i} target="_blank">
                             {(v.socialLink.startsWith(

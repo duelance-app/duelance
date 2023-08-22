@@ -12,11 +12,20 @@ import { z } from "zod"
 import { createTRPCRouter, publicProcedure } from "../trpc"
 
 export const userRouter = createTRPCRouter({
-    get: publicProcedure
-        .input(z.object({ id: z.string().optional() }))
+    getBasic: publicProcedure
+        .input(z.object({ id: z.string() }))
         .query(({ input, ctx }) => {
-            const data = ctx.prisma.user.findUnique({
+            const user = ctx.prisma.user.findUnique({
                 where: { id: input.id },
+                select: {
+                    id: true,
+                    userName: true,
+                    name: true,
+                    email: true,
+                    image: true,
+                    bio: true,
+                    status: true,
+                },
             })
             const followers = ctx.prisma.follower.count({
                 where: { userId: input.id },
@@ -24,14 +33,28 @@ export const userRouter = createTRPCRouter({
             const following = ctx.prisma.follower.count({
                 where: { followerId: input.id },
             })
-            const socials = ctx.prisma.social.findMany({
-                where: { userId: input.id },
+            const data = ctx.prisma.$transaction([user, followers, following])
+            return data
+        }),
+    getAdditional: publicProcedure
+        .input(z.object({ id: z.string() }))
+        .query(({ input, ctx }) => {
+            const data = ctx.prisma.user.findUnique({
+                where: { id: input.id },
+                select: {
+                    tags: true,
+                    socials: true,
+                    awards: true,
+                    certificates: true,
+                    courses: true,
+                    education: true,
+                    experience: true,
+                    projects: true,
+                    skills: true,
+                    publications: true,
+                },
             })
-            return ctx.prisma.$transaction([
-                data,
-                followers,
-                following,
-                socials,
-            ])
+
+            return data
         }),
 })
